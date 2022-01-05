@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct DrawerView: View {
+    @ObservedObject var imageInfo: ImageInfo
     @State private var isDrawerOpen : Bool = false
     @Binding var isAnimating : Bool
-    @Binding var pageIndex : Int
     
-    let pages: [Page] = pagesData
     
     var body: some View {
         HStack(spacing: 12) {
@@ -30,20 +29,29 @@ struct DrawerView: View {
                 }
             
             //MARK: - Thumbnails
-            ForEach(pages) { item in
-                Image("thumb-" + item.imageName)
+            Button {
+                //Camera
+                imageInfo.source = .camera
+                imageInfo.showPhotoPicker()
+            } label: {
+                Image(systemName: "camera.fill")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 80)
-                    .cornerRadius(8)
-                    .shadow(radius: 4)
-                    .opacity(isDrawerOpen ? 1 : 0)
-                    .animation(.easeOut(duration: 0.5), value: isDrawerOpen)
-                    .onTapGesture {
-                        isAnimating = true
-                        pageIndex = item.id
-                    }
+                    .padding(.horizontal)
+                    .frame(maxHeight: 40)
             }
+            Button {
+                //Photos
+                imageInfo.source = .library
+                imageInfo.showPhotoPicker()
+            } label: {
+                Image(systemName: "photo.fill.on.rectangle.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .padding(.horizontal)
+                    .frame(maxHeight: 40)
+            }
+
             
             Spacer()
         }
@@ -52,7 +60,7 @@ struct DrawerView: View {
         .cornerRadius(12)
         .opacity(isAnimating ? 1 : 0)
         .animation(.linear(duration: 1), value: isAnimating)
-        .frame(width: 260)
+        .frame(width: 260, height: 100)
         .padding(.top, UIScreen.main.bounds.height / 12)
         .offset(x: isDrawerOpen ? 20 : 215)
     }
@@ -60,7 +68,7 @@ struct DrawerView: View {
 
 struct DrawerView_Previews: PreviewProvider {
     static var previews: some View {
-        DrawerView(isAnimating: .constant(true), pageIndex: .constant(0))
+        DrawerView(imageInfo: ImageInfo(), isAnimating: .constant(true))
             .preferredColorScheme(.dark)
             .padding()
     }

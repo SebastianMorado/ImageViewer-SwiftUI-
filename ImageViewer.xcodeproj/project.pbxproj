@@ -14,8 +14,8 @@
 		64B95EF027845A3500327640 /* InfoPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B95EEF27845A3500327640 /* InfoPanelView.swift */; };
 		64B95EF227845E3D00327640 /* ControlPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B95EF127845E3D00327640 /* ControlPanelView.swift */; };
 		64B95EF427847F9B00327640 /* DrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B95EF327847F9B00327640 /* DrawerView.swift */; };
-		64B95EF62784847800327640 /* PageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B95EF52784847800327640 /* PageModel.swift */; };
-		64B95EF8278484D100327640 /* PageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B95EF7278484D100327640 /* PageData.swift */; };
+		64FB8BB527857F9B008D8CC5 /* Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB8BB427857F9B008D8CC5 /* Picker.swift */; };
+		64FB8BB7278581D9008D8CC5 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB8BB6278581D9008D8CC5 /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,8 +27,8 @@
 		64B95EEF27845A3500327640 /* InfoPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPanelView.swift; sourceTree = "<group>"; };
 		64B95EF127845E3D00327640 /* ControlPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlPanelView.swift; sourceTree = "<group>"; };
 		64B95EF327847F9B00327640 /* DrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerView.swift; sourceTree = "<group>"; };
-		64B95EF52784847800327640 /* PageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageModel.swift; sourceTree = "<group>"; };
-		64B95EF7278484D100327640 /* PageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageData.swift; sourceTree = "<group>"; };
+		64FB8BB427857F9B008D8CC5 /* Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picker.swift; sourceTree = "<group>"; };
+		64FB8BB6278581D9008D8CC5 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,8 +61,8 @@
 		645F4E0D27842EE10035BC79 /* ImageViewer */ = {
 			isa = PBXGroup;
 			children = (
+				64FB8BB327857F7B008D8CC5 /* UIViewRepresentable */,
 				645F4E22278453290035BC79 /* Model */,
-				645F4E21278453230035BC79 /* Data */,
 				645F4E0E27842EE10035BC79 /* ImageViewerApp.swift */,
 				645F4E1F27842F0A0035BC79 /* Views */,
 				645F4E1C27842EEE0035BC79 /* Screens */,
@@ -98,20 +98,20 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		645F4E21278453230035BC79 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				64B95EF7278484D100327640 /* PageData.swift */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
 		645F4E22278453290035BC79 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				64B95EF52784847800327640 /* PageModel.swift */,
+				64FB8BB427857F9B008D8CC5 /* Picker.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		64FB8BB327857F7B008D8CC5 /* UIViewRepresentable */ = {
+			isa = PBXGroup;
+			children = (
+				64FB8BB6278581D9008D8CC5 /* ImagePicker.swift */,
+			);
+			path = UIViewRepresentable;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,9 +187,9 @@
 				645F4E1127842EE10035BC79 /* ContentView.swift in Sources */,
 				64B95EF227845E3D00327640 /* ControlPanelView.swift in Sources */,
 				645F4E0F27842EE10035BC79 /* ImageViewerApp.swift in Sources */,
+				64FB8BB7278581D9008D8CC5 /* ImagePicker.swift in Sources */,
 				64B95EF427847F9B00327640 /* DrawerView.swift in Sources */,
-				64B95EF8278484D100327640 /* PageData.swift in Sources */,
-				64B95EF62784847800327640 /* PageModel.swift in Sources */,
+				64FB8BB527857F9B008D8CC5 /* Picker.swift in Sources */,
 				64B95EF027845A3500327640 /* InfoPanelView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -324,6 +324,8 @@
 				DEVELOPMENT_TEAM = 453J5S23QT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Would like to use your camera to take photos";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Would like to use photos saved in your library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -355,6 +357,8 @@
 				DEVELOPMENT_TEAM = 453J5S23QT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Would like to use your camera to take photos";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Would like to use photos saved in your library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
